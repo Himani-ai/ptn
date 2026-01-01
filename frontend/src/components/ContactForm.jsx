@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+const API_BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/$/, '')
+
 export default function ContactForm(){
   const [form, setForm] = useState({name:'', destination:'', people:'', days:'', email:'', phone:'', message:''})
   const [sent, setSent] = useState(false)
@@ -15,7 +17,7 @@ export default function ContactForm(){
     setError('')
     setLoading(true)
     try {
-      const res = await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(form)})
+      const res = await fetch(`${API_BASE}/api/contact`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(form)})
       if (!res.ok) throw new Error('Network error')
       setSent(true)
       // Trigger a mailto draft to pictournic@gmail.com with the submitted details

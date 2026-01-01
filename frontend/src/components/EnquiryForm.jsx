@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+const API_BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/$/, '')
+
 export default function EnquiryForm(){
   const [form, setForm] = useState({name:'', destination:'', people:'', days:''})
   const [status, setStatus] = useState(null)
@@ -7,7 +9,7 @@ export default function EnquiryForm(){
   async function submit(e){
     e.preventDefault()
     try{
-      const res = await fetch('/api/contact', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({type:'enquiry', ...form})})
+      const res = await fetch(`${API_BASE}/api/contact`, {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({type:'enquiry', ...form})})
       if (!res.ok) throw new Error('failed')
       setStatus('sent')
       setForm({name:'', destination:'', people:'', days:''})

@@ -13,12 +13,15 @@ import AboutUs from './components/AboutUs'
 import destinations from './data/destinations'
 import exploreHighlightsBg from './assets/explore-highlights.png'
 
+const API_BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/$/, '')
+
 export default function App(){
   const [tours, setTours] = useState([])
   const [showAbout, setShowAbout] = useState(false)
   
   useEffect(()=>{
-    fetch('/api/tours').then(r=>r.json()).then(setTours).catch(()=>setTours([]))
+    const url = `${API_BASE}/api/tours`
+    fetch(url).then(r=>r.json()).then(setTours).catch(()=>setTours([]))
   },[])
 
   const highlights = tours.length ? tours.slice(0,6) : []
