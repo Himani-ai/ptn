@@ -21,6 +21,9 @@ body{margin:0;background:linear-gradient(180deg,var(--lightgray) 0%, #ffffff 100
 h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:600}
 .app-root{padding-top:var(--topbar-h)}
 .container{max-width:1100px;margin:0 auto;padding:24px}
+@media (max-width:900px){.container{padding:20px}}
+@media (max-width:640px){.container{padding:16px}}
+@media (max-width:480px){.container{padding:12px}}
 
 .hero{
 	min-height:calc(100vh - var(--topbar-h));
@@ -66,7 +69,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:600}
 .carousel-wrap{position:relative;margin:12px 0}
 .carousel{display:flex;gap:12px;overflow-x:auto;padding:8px 4px;scroll-behavior:smooth}
 .carousel::-webkit-scrollbar{height:10px}
-.carousel-card{min-width:260px;flex:0 0 auto}
+.carousel-card{min-width:240px;flex:0 0 auto}
 .carousel-btn{position:absolute;top:8px;width:36px;height:36px;border-radius:50%;border:0;background:var(--navy);color:#fff;opacity:0.9;cursor:pointer}
 .carousel-btn.prev{left:8px}
 .carousel-btn.next{right:8px}
@@ -106,7 +109,7 @@ textarea{min-height:100px;resize:vertical}
 .carousel-wrap{position:relative;margin:12px 0}
 .carousel{display:flex;gap:12px;overflow-x:auto;padding:12px 6px;scroll-behavior:smooth}
 .carousel::-webkit-scrollbar{height:10px}
-.carousel-item{min-width:260px;flex:0 0 260px}
+.carousel-item{min-width:240px;flex:0 0 240px}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:var(--navy);border:0;color:#fff;padding:8px 10px;border-radius:6px;cursor:pointer}
 .carousel-btn.left{left:6px}
 .carousel-btn.right{right:6px}
@@ -124,7 +127,7 @@ textarea{min-height:100px;resize:vertical}
 /* Topbar */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);padding:0;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
 .topbar .container{padding:8px 24px}
-.topbar-inner{display:flex;align-items:center;justify-content:space-between}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .right-group{display:flex;align-items:center;gap:12px}
 .logo{display:flex;align-items:center;gap:12px;font-weight:700}
 .logo-image{width:56px;height:56px;object-fit:contain}
@@ -133,7 +136,7 @@ textarea{min-height:100px;resize:vertical}
 .logo-tagline{color:#444;font-size:13px;font-style:italic;font-weight:400;letter-spacing:0.2px;margin-top:2px;text-align:right}
 .topnav{position:relative}
 .dropbtn{background:transparent;border:0;color:inherit;cursor:pointer;padding:8px}
-.dropdown{position:absolute;right:0;top:36px;background:var(--card);border:1px solid rgba(43,45,66,0.06);padding:12px;display:flex;gap:12px;border-radius:8px}
+.dropdown{position:absolute;right:0;top:36px;background:var(--card);border:1px solid rgba(43,45,66,0.06);padding:12px;display:flex;gap:12px;border-radius:8px;width:min(320px,92vw);box-sizing:border-box}
 .dropdown-column{min-width:160px}
 .dropdown-column a{display:block;color:var(--muted);padding:4px 0;text-decoration:none}
 .top-actions a{color:inherit;text-decoration:none}
@@ -157,6 +160,10 @@ textarea{min-height:100px;resize:vertical}
 .social-name{font-size:14px;font-weight:500}
 
 .stays-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.stays{border-radius:16px;box-shadow:0 10px 26px rgba(0,0,0,0.08);padding:32px 24px}
+.stay-card{background:#ffffff;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,0.08);border:1px solid #f0f0f0;min-height:110px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s ease, box-shadow 0.2s ease}
+.stay-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,0.12)}
+.stay-card .card-body strong{font-size:17px;color:var(--navy);font-weight:700}
 .stay-card{display:flex;align-items:center;gap:10px;padding:10px}
 
 /* Reviews Section */
@@ -184,6 +191,12 @@ textarea{min-height:100px;resize:vertical}
 .tours-section.has-bg{background-color:transparent;background-size:cover;background-position:center}
 .tours-section h2{margin-bottom:24px}
 .tours-section.has-bg h2{color:#ffffff;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+.tours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tour-card{background:rgba(255,255,255,0.9);border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.08);padding:18px;backdrop-filter:blur(2px);transition:transform 0.2s ease, box-shadow 0.2s ease}
+.tour-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,0.12)}
+.tour-card-body{display:flex;align-items:center;gap:12px}
+.tour-chip{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg, var(--turquoise), var(--sandstone));color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.tour-card h3{margin:0;font-size:17px;color:var(--navy);line-height:1.4}
 .highlights-title{text-align:center;margin-bottom:24px}
 .highlights-section{margin:12px 0 32px;padding:28px 18px;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,0.08);background-size:cover;background-position:center}
 .highlights-section .highlights-title{color:#ffffff;text-shadow:0 3px 12px rgba(0,0,0,0.4);margin-top:0}
@@ -192,18 +205,46 @@ textarea{min-height:100px;resize:vertical}
 .highlights-card h3{margin:0;color:var(--navy);font-size:18px;letter-spacing:0.2px}
 
 /* small screens tweaks */
-@media (max-width:640px){
-	.container{padding:16px}
+@media (max-width:768px){
+	.topbar-inner{align-items:flex-start}
+	.dropdown{left:0;right:auto;top:44px}
+	.tours-section{padding:24px 18px;margin:32px auto}
+	.tours-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+	.tour-card{padding:16px}
+	.highlights-section{padding:22px 16px;margin:8px 0 24px}
 	.carousel-item{min-width:220px}
-	.dropdown{left:0;right:auto}
-  .logo-image{width:40px;height:40px}
-  .logo-text{font-size:22px}
-	.hero{min-height:calc(100vh - var(--topbar-h));padding:48px 0 24px}
-	.hero-inner{padding:36px 16px 28px}
-	.hero-title{font-size:32px}
-	.hero-lines{gap:6px;max-width:100%}
-	.hero-line{font-size:16px;line-height:1.6}
-	.hero-cta{padding:12px 22px}
+	.unique-categories-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+	.stays-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+}
+
+@media (max-width:640px){
+		.carousel-item{min-width:200px}
+		.dropdown{left:0;right:auto}
+	.logo-image{width:40px;height:40px}
+	.logo-text{font-size:22px}
+		.hero{min-height:calc(100vh - var(--topbar-h));padding:48px 0 24px}
+		.hero-inner{padding:36px 16px 28px}
+		.hero-title{font-size:32px}
+		.hero-lines{gap:6px;max-width:100%}
+		.hero-line{font-size:16px;line-height:1.6}
+		.hero-cta{padding:12px 22px}
+		.tours-section h2{margin-bottom:16px}
+		.tour-card h3{font-size:16px}
+		.highlights-section .card{box-shadow:0 6px 16px rgba(0,0,0,0.08)}
+		.reviews-section{padding:24px 18px}
+}
+
+@media (max-width:480px){
+	.topbar-inner{flex-direction:column;align-items:flex-start}
+	.dropdown{width:100%;max-width:92vw}
+	.carousel-btn{padding:6px 8px}
+	.carousel-item{min-width:180px}
+	.tours-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+	.unique-categories-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+	.stays-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+	.tours-section{padding:20px 14px}
+	.tour-card{padding:14px}
+	.highlights-section{padding:18px 14px}
 }
 
 /* About Us Page */
