@@ -1,0 +1,12 @@
+{
+  "name": "ptn",
+  "private": true,
+  "scripts": {
+    "start": "npm run build:frontend && npm run start:backend",
+    "build:frontend": "npm --prefix frontend run build",
+    "start:backend": "npm --prefix backend start"
+  },
+  "dependencies": {
+    "puppeteer": "^24.34.0"
+  }
+}
