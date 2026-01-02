@@ -49,4 +49,4 @@ Domain (GoDaddy):
 Notes:
 - Frontend calls now use `VITE_API_BASE` at build/runtime; without it they fall back to relative `/api/*` for local dev with the Vite proxy.
 - Keep `node_modules/` and `frontend/dist/` out of git (see `.gitignore`).
-# ptn
+# ptn# Build cache buster - Fri Jan  2 05:47:21 UTC 2026
