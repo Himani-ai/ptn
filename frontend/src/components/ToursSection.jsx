@@ -1,4 +1,5 @@
 import React from 'react'
+import Carousel from './Carousel'
 import natureBg from '../assets/nature-stay.png'
 import beachBg from '../assets/beach-stay.png'
 import divineBg from '../assets/new divine.png'
