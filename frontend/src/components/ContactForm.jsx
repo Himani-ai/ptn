@@ -17,7 +17,9 @@ export default function ContactForm(){
     setError('')
     setLoading(true)
     try {
-      const res = await fetch(`${API_BASE}/api/contact`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(form)})
+      const payload = {type:'enquiry',...form}
+      console.log('Sending payload:', payload)
+      const res = await fetch(`${API_BASE}/api/contact`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
       if (!res.ok) throw new Error('Network error')
       setSent(true)
       // Trigger a mailto draft to pictournic@gmail.com with the submitted details

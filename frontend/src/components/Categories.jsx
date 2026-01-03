@@ -209,9 +209,11 @@ function Section({ title, items = [] }){
             const itemTitle = normalize(itemTitleRaw)
             const categoryImg = imageMapping[itemTitle]
             const places = Array.isArray(it.places) ? it.places : null
+            const displayTitle = String(itemTitleRaw || '').toUpperCase()
             const placesText = places ? places.join(', ') : null
+            const displayPlaces = placesText ? placesText.toUpperCase() : null
             const isExpanded = expandedCard === idx
-            const shouldTruncate = placesText && placesText.length > 40
+            const shouldTruncate = displayPlaces && displayPlaces.length > 40
             
             return (
               <div 
@@ -237,19 +239,19 @@ function Section({ title, items = [] }){
                   }}
                 >
                   <div className="unique-cat-overlay">
-                    <div className="unique-cat-title">{itemTitleRaw}</div>
-                    {placesText && (
+                    <div className="unique-cat-title">{displayTitle}</div>
+                    {displayPlaces && (
                       <div className="unique-cat-places">
                         {shouldTruncate && !isExpanded ? (
                           <>
-                            {placesText.substring(0, 40)}
+                            {displayPlaces.substring(0, 40)}
                             <span className="places-more" onClick={(e) => {
                               e.stopPropagation()
                               setExpandedCard(idx)
                             }}>...more</span>
                           </>
                         ) : (
-                          placesText
+                          displayPlaces
                         )}
                       </div>
                     )}

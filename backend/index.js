@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +12,15 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
+
+// Email transporter configuration
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER || 'pictournic@gmail.com',
+    pass: process.env.EMAIL_PASSWORD // App password for Gmail
+  }
+});
 
 // Simple Tour model fallback — will prefer backend/tours.json if present
 const sampleTours = [
@@ -51,10 +61,11 @@ app.get('/api/tours', async (req, res) => {
   }
 });
 
-app.post('/api/contact', (req, res) => {
-  const { name, email, message } = req.body || {};
-  console.log('Contact form submitted', { name, email, message });
-  // Persist contact submissions to a local file so they are available without Mongo.
+app.post('/api/contact', async (req, res) => {
+  const { name, email, message, type, phone, destination, people, days } = req.body || {};
+  console.log('Contact form submitted', { name, email, message, type, phone, destination, people, days });
+  
+  // Persist contact submissions to a local file
   try {
     const contactsPath = path.join(__dirname, 'contacts.json');
     let existing = [];
@@ -62,9 +73,68 @@ app.post('/api/contact', (req, res) => {
       const raw = fs.readFileSync(contactsPath, 'utf8') || '[]';
       existing = JSON.parse(raw);
     }
-    const entry = { name: name || '', email: email || '', message: message || '', createdAt: new Date().toISOString() };
+    const entry = { 
+      name: name || '', 
+      email: email || '', 
+      phone: phone || '',
+      message: message || '', 
+      type: type || 'contact',
+      destination: destination || '',
+      people: people || '',
+      days: days || '',
+      createdAt: new Date().toISOString() 
+    };
     existing.push(entry);
     fs.writeFileSync(contactsPath, JSON.stringify(existing, null, 2), 'utf8');
+    
+    // Send email notification
+    if (process.env.EMAIL_PASSWORD) {
+      try {
+        let emailSubject, emailBody;
+        
+        if (type === 'enquiry' || destination) {
+          // Enquiry template (when type is enquiry OR destination is provided)
+          emailSubject = `New Travel Enquiry from ${name}`;
+          emailBody = `
+            <h2>New Travel Enquiry</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email || 'Not provided'}</p>
+            <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+            <p><strong>Destination:</strong> ${destination || 'Not specified'}</p>
+            <p><strong>Number of People:</strong> ${people || 'Not specified'}</p>
+            <p><strong>Days:</strong> ${days || 'Not specified'}</p>
+            ${message ? `<p><strong>Message:</strong></p><p>${message}</p>` : ''}
+            <p><strong>Submitted at:</strong> ${new Date().toLocaleString()}</p>
+          `;
+        } else {
+          // Contact message template
+          emailSubject = `New Contact Message from ${name}`;
+          emailBody = `
+            <h2>New Contact Message</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email || 'Not provided'}</p>
+            <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message || 'No message'}</p>
+            <p><strong>Submitted at:</strong> ${new Date().toLocaleString()}</p>
+          `;
+        }
+        
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER || 'pictournic@gmail.com',
+          to: 'pictournic@gmail.com',
+          subject: emailSubject,
+          html: emailBody
+        });
+        console.log('Email sent successfully');
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError.message);
+        // Don't fail the request if email fails
+      }
+    } else {
+      console.warn('Email not configured. Set EMAIL_PASSWORD in .env to enable email notifications.');
+    }
+    
     res.json({ ok: true });
   } catch (err) {
     console.error('Failed to persist contact', err);

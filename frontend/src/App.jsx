@@ -31,7 +31,7 @@ export default function App(){
   const international = tours.length ? tours.filter(t=>t.category && t.category.toLowerCase().includes('international')) : destinations.normalized.internationalDetailed.map(d=>({title:d.title || d}))
 
   const groups = {
-    'Unique experiential categories': destinations.normalized.experientialCategories.map(t=>({title:t})),
+    'Unique Experiential Categories': destinations.normalized.experientialCategories.map(t=>({title:t})),
     'Divine Tours': destinations.normalized.divine.map(d=>({title:d})),
     'Domestic Tours': destinations.normalized.domesticDetailed.map(d=>({title:d.title || d, subtitle: Array.isArray(d.places) ? d.places.join(', ') : undefined})),
     'International Tours': destinations.normalized.internationalDetailed.map(d=>({title:d.title || d, subtitle: Array.isArray(d.places) ? d.places.join(', ') : undefined}))
@@ -75,14 +75,14 @@ export default function App(){
 
   // top categories for the main highlights carousel (each links to a section below)
   const topCategories = [
-    {id:'corporate', title:'Corporate stays / tours', active: true},
-    {id:'nature', title:'Nature stays', active: false},
-    {id:'beach', title:'Beach front stays', active: false},
-    {id:'luxury', title:'Luxury stays', active: true},
+    {id:'corporate', title:'Corporate Stays / Tours', active: true},
+    {id:'nature', title:'Nature Stays', active: false},
+    {id:'beach', title:'Beach Front Stays', active: false},
+    {id:'luxury', title:'Luxury Stays', active: true},
     {id:'all-tours', title:'All Tours', active: false},
-    {id:'day-outing', title:'Day outing', active: true},
-    {id:'quick-tours', title:'Quick tours', active: false},
-    {id:'group-tours', title:'Group tours', active: true}
+    {id:'day-outing', title:'Day Outing', active: true},
+    {id:'quick-tours', title:'Quick Tours', active: false},
+    {id:'group-tours', title:'Group Tours', active: true}
   ]
 
   return (
@@ -102,7 +102,7 @@ export default function App(){
             backgroundPosition: 'center'
           }}
         >
-          <h2 className="highlights-title">Explore our highlights</h2>
+          <h2 className="highlights-title">Explore Our Highlights</h2>
           <Carousel items={topCategories} renderItem={(it)=>(
             <div onClick={()=>{
               if (it.active) {
@@ -111,7 +111,7 @@ export default function App(){
             }} style={{cursor: it.active ? 'pointer' : 'default', opacity: it.active ? 1 : 0.6}}>
               <div className="card carousel-card highlights-card">
                 <div className="card-body highlights-card-body">
-                  <h3>{it.title}</h3>
+                  <h3>{(it.title || '').toUpperCase()}</h3>
                 </div>
               </div>
             </div>
@@ -121,16 +121,16 @@ export default function App(){
         <Categories groups={groups} />
 
         {/* Active sections */}
-        <ToursSection id="corporate" title="Corporate stays / tours" items={corporate} />
-        <ToursSection id="luxury" title="Luxury stays" items={luxury} />
-        <ToursSection id="day-outing" title="Day outing" items={dayOuting} />
-        <ToursSection id="group-tours" title="Group tours" items={groupTours} />
+        <ToursSection id="corporate" title="Corporate Stays / Tours" items={corporate} />
+        <ToursSection id="luxury" title="Luxury Stays" items={luxury} />
+        <ToursSection id="day-outing" title="Day Outing" items={dayOuting} />
+        <ToursSection id="group-tours" title="Group Tours" items={groupTours} />
         
         {/* HIDDEN SECTIONS - Code kept for future use */}
-        {/* <ToursSection id="nature" title="Nature stays" items={natureStays} />
-        <ToursSection id="beach" title="Beach front stays" items={beachFront} />
+        {/* <ToursSection id="nature" title="Nature Stays" items={natureStays} />
+        <ToursSection id="beach" title="Beach Front Stays" items={beachFront} />
         <ToursSection id="all-tours" title="All Tours" items={allTours} />
-        <ToursSection id="quick-tours" title="Quick tours" items={quickTours} /> */}
+        <ToursSection id="quick-tours" title="Quick Tours" items={quickTours} /> */}
 
         <Stays list={["Coorg","Chikmagalur","Sakaleshpura","Mysore","Wayanad","Ooty","Kodaikanal","Goa","Pondicherry","Udupi","Mangalore"]} />
 
