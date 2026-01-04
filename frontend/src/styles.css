@@ -39,8 +39,8 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:600}
 
 @media (max-width:640px){
   .t-slogan{font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:1rem}
-  .t-subtext{gap:1rem;margin-bottom:2rem;padding:0 12px}
-  .row{width:100% !important;justify-content:center;flex-wrap:wrap}
+  .t-subtext{gap:2.5rem;margin-bottom:2rem;padding:0 12px}
+  .row{width:100% !important;justify-content:center;flex-wrap:wrap;gap:1rem}
   .row span{font-size:clamp(0.85rem,3vw,1rem)}
   .cta{padding:0.5rem 1rem;font-size:0.95rem;margin-top:1rem}
 }
