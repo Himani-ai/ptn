@@ -13,6 +13,28 @@ import AboutUs from './components/AboutUs'
 import destinations from './data/destinations'
 import exploreHighlightsBg from './assets/explore-highlights.png'
 
+// Import Explore highlights images
+import exploreCorporateImg from './assets/Explore our highlights/Corporate Groups.jpg'
+import exploreLuxuryImg from './assets/Explore our highlights/luxury stays.jpeg'
+import exploreDayOutingImg from './assets/Explore our highlights/dayouting.jpg'
+import exploreGroupToursImg from './assets/Explore our highlights/Group Tours.jpg'
+import exploreNatureImg from './assets/Explore our highlights/Nature Stays.jpg'
+import exploreBeachImg from './assets/Explore our highlights/Beach Front Stay.jpg'
+import exploreAllToursImg from './assets/Explore our highlights/all tours.jpeg'
+import exploreQuickToursImg from './assets/Explore our highlights/Quick Tours.jpg'
+
+// Map for Explore highlights images
+const highlightImages = {
+  'corporate': exploreCorporateImg,
+  'luxury': exploreLuxuryImg,
+  'day-outing': exploreDayOutingImg,
+  'group-tours': exploreGroupToursImg,
+  'nature': exploreNatureImg,
+  'beach': exploreBeachImg,
+  'all-tours': exploreAllToursImg,
+  'quick-tours': exploreQuickToursImg
+}
+
 const API_BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/$/, '')
 
 export default function App(){
@@ -108,10 +130,39 @@ export default function App(){
               if (it.active) {
                 document.getElementById(it.id)?.scrollIntoView({behavior:'smooth'})
               }
-            }} style={{cursor: it.active ? 'pointer' : 'default', opacity: it.active ? 1 : 0.6}}>
-              <div className="card carousel-card highlights-card">
-                <div className="card-body highlights-card-body">
-                  <h3>{(it.title || '').toUpperCase()}</h3>
+            }} style={{cursor: it.active ? 'pointer' : 'default', opacity: it.active ? 1 : 0.7}}>
+              <div className="card carousel-card highlights-card" style={{
+                backgroundImage: highlightImages[it.id] ? `url('${highlightImages[it.id]}')` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                minHeight: '150px',
+                display: 'flex',
+                alignItems: 'flex-end',
+                position: 'relative',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                padding: '12px'
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: it.active ? 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)' : 'linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.3))',
+                  borderRadius: '8px'
+                }} />
+                <div className="card-body highlights-card-body" style={{
+                  position: 'relative',
+                  zIndex: 1,
+                  width: '100%',
+                  textAlign: 'center'
+                }}>
+                  <h3 style={{
+                    color: '#ffffff',
+                    margin: 0,
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.4px'
+                  }}>{(it.title || '').toUpperCase()}</h3>
                 </div>
               </div>
             </div>
@@ -132,7 +183,7 @@ export default function App(){
         <ToursSection id="all-tours" title="All Tours" items={allTours} />
         <ToursSection id="quick-tours" title="Quick Tours" items={quickTours} /> */}
 
-        <Stays list={["Coorg","Chikmagalur","Sakaleshpura","Mysore","Wayanad","Ooty","Kodaikanal","Goa","Pondicherry","Udupi","Mangalore"]} />
+        <Stays list={["Coorg","Chikmagalur","Sakleshpur","Mysore","Wayanad","Ooty","Kodaikanal","Goa","Pondicherry","Udupi","Mangalore","Kovallam","Munnar","Varkala"]} />
 
         <ContactForm />
         <ContactUs />
