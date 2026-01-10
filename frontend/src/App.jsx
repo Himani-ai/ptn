@@ -11,7 +11,7 @@ import ToursSection from './components/ToursSection'
 import Stays from './components/Stays'
 import AboutUs from './components/AboutUs'
 import destinations from './data/destinations'
-import exploreHighlightsBg from './assets/explore-highlights.png'
+import exploreHighlightsBg from './Explore our highlights.jpeg'
 
 // Import Explore highlights images
 import exploreCorporateImg from './assets/Explore our highlights/Corporate Groups.jpg'
@@ -119,7 +119,7 @@ export default function App(){
         <section
           className="highlights-section has-bg"
           style={{
-            backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25)), url('${exploreHighlightsBg}')`,
+            backgroundImage: `url('${exploreHighlightsBg}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -146,7 +146,7 @@ export default function App(){
                 <div style={{
                   position: 'absolute',
                   inset: 0,
-                  background: it.active ? 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)' : 'linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.3))',
+                  background: it.active ? 'linear-gradient(to top, rgba(0,0,0,0.15), transparent)' : 'linear-gradient(to top, rgba(0,0,0,0.25), rgba(0,0,0,0.1))',
                   borderRadius: '8px'
                 }} />
                 <div className="card-body highlights-card-body" style={{
